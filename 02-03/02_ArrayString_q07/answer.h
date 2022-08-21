@@ -12,7 +12,7 @@ void findAllIndex(string s1, string s2){
             cout << i << endl;
             flag = true;
         }
-    }
+    } 
     if (flag == false){
         cout << ""
     }

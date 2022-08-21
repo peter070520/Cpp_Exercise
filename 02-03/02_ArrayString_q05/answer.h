@@ -14,7 +14,7 @@ void process(char str[], char outstr[]) {
                 str[++j] = str[i];
             }
             str[i] = (char)(str[i] >='a' && str[i] <= 'z' ?((int)str[i] -32) : (int)str[i]);
-        }
+        } 
     }
     str[j] = '\0';
 }

@@ -12,7 +12,7 @@ void tempMain() {
     cin >> n;
     for (i=1; i<=n; i++){
         cin >> arr[i];
-    }
+    } 
     
     for (i=1; i<=n; i++){
         if (arr[i] > max){

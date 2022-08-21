@@ -14,7 +14,7 @@ void tempMain() {
     else if (number_max < number_3){
         number_max = number_3;
         cout << number_max;
-    }
+    } 
     else {
         cout << number_max;
     }

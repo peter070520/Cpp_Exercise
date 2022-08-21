@@ -10,7 +10,7 @@ void tempMain() {
     cin >> number;
     if (number > number_default){
         cout << number << " is greater than " << number_default << "." << endl;
-    }
+    } 
     else if (number >=0 && number <= number_default){
         cout << number << " is lower than " << number_default << "." << endl;
     }

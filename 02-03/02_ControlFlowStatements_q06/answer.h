@@ -16,6 +16,7 @@ void tempMain() {
             result1 = result1*x;
         }
         cout << fixed << setprecision(2) << result1 << " ";
+        
         for (i=1; i<=n; i++){
             result2 = result2*(1/x);
         }

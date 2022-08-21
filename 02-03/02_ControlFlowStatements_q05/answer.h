@@ -24,7 +24,7 @@ void tempMain() {
                 x1 = -b/(2*a);
                 x2 = x1;
                 cout << x1 << endl << x2;
-            }
+            } 
             else if (delta > 0){
                 x1 = (-b+sqrt(delta,2))/(2*a);
                 x2 = (-b-sqrt(delta,2))/(2*a);

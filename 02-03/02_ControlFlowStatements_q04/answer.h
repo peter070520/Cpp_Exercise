@@ -20,7 +20,7 @@ void tempMain() {
     }
     else if ((side_1==(side_2+side_3)) || (side_2==(side_1+side_3)) || (side_3=(side_1+side_2))){        
         cout << "The triangle is Right-angled triangle.";
-    }
+    } 
     else {
         cout << "The triangle is Scalene triangle.";
     }

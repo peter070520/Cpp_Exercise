@@ -12,7 +12,7 @@ void tempMain() {
                 n=1;
                 cout << n;
                 continue;
-            }
+            } 
             temp = num1 + num2;
             num1 = num2;
             num2 = temp;

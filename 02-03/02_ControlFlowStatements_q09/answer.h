@@ -5,7 +5,7 @@ using namespace std;
 
 void tempMain() {
     /// BEGIN  <STUDENT ANSWER>
-    int n, i, neg=0, pos=0;
+    int n, i, neg=0, pos=0; 
     float arr[100];
 
     cin >> n;
