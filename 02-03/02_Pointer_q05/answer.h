@@ -14,7 +14,7 @@ void insertRow(int**& matrix, int r, int c, int* rowArr, int row) {
             *(*(matrix+r)+i) = *(rowArr+i);
         }
         for (i=r; i>row; --i){
-            for (j=0; i<c; ++j){
+            for (j=0; j<c; ++j){
                 rowAbove = i-1;
                 temp = *(*(matrix +rowAbove) +j);
                 *(*(matrix+rowAbove)+j) = *(*(matrix+i)+j);
