@@ -5,12 +5,13 @@
 using namespace std;
 
 void deleteWord(string s, string s1){
-    //TO DO
-    int i, n = s.length();
-    for(char temp : s1){
-        s.earse(remove(s.begin(), s.end(), temp), s.end());
-    } 
-    // for(i=0; i<n, i++;){
-
-    // }
+    //TO DO    
+    int string=0;
+    while (string!=-1){
+        string = s.find(s1, string+1);
+        if (string != -1){
+            s.erase(s.begin() + string, s.begin() + string + s1.length());
+        }
+    }
+    cout << s;
 }
