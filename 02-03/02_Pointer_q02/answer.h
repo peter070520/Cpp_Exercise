@@ -9,7 +9,7 @@ int findMax(int *ptr, int n)
     int i, max=0;
     for (i=0; i<n; ++i){
         if (*(ptr +i) >= max) {
-            max = ptr[i];
+            max = *(ptr + i);
         }
     }
     return max;
