@@ -6,42 +6,35 @@ using namespace std;
 
 void tempMain() {
     /// BEGIN  <STUDENT ANSWER>
-    float a, b, c, delta, x, x1, x2;
-    cin >> a >> b >> c;
-    if (a!=0) {
-        if (b==0){
-            if (c!=0){
-                x = sqrt(-c/a);
-                cout << x << endl;
-            }
-            else if (c==0) {            
-                cout << "Countless solutions";
-            }
-        }
-        else {
-            delta = pow(b,2)-(4*a*c);
-            if (delta ==0){
-                x1 = -b/(2*a);
-                x2 = x1;
-                cout << x1 << endl << x2;
-            } 
-            else if (delta > 0){
-                x1 = (-b+sqrt(delta,2))/(2*a);
-                x2 = (-b-sqrt(delta,2))/(2*a);
-                cout << x1 << endl << x2;
-            }
-            else if (delta < 0){
-                cout << "No solution";
-            }
-        }
-    }
-    else if (a==0)
+    int num1, num2, num3;
+    float delta, x1, x2;
+    cin >> num1 >> num2 >> num3;
+    if (num1!=0)
     {
-        x=-c/b;
-        cout << x << endl;
-    }
-    else {
-        cout << "No solution";
+        delta = float(pow(num2,2) - 4*(num1*num3));    
+        if (delta > 0)
+        {
+            cout<<"Two solutions \n";
+            x1 = -(num2 + sqrt(delta))/2*num1;
+            x2 = -(num2 - sqrt(delta))/2*num1;
+            cout<<"x1 = "<< x1 << endl;
+            cout<<"x2 = "<< x2 << endl;
+            return;
+        }else if (delta = 0)
+        {
+            cout<<"One solution \n";
+            x1 = -num2/2*num1;
+            cout<<"x1 = x2 = "<< x1 << endl;
+            return;
+        }else
+        {
+            cout<<"No solution \n";
+            return;
+        }
+    }else
+    {
+        cout<<"Countless solutions\n";
+        return;
     }
     /// END  <STUDENT ANSWER>
 }
