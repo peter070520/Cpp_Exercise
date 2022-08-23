@@ -14,10 +14,10 @@ void tempMain() {
     }
     for (i=1; i<=n; ++i){
         if (arr[i]>=0){
-            pos += arr[i];
+            pos ++;
         }
         else if (arr[i]<0){
-            neg += arr[i];
+            neg ++;
         }
     }
     cout << pos << " " << neg << endl;
