@@ -5,18 +5,15 @@ using namespace std;
 
 void tempMain() {
     /// BEGIN  <STUDENT ANSWER>
-    int n, num1=0, num2=1, temp=0;
+    int i, f[20], n;
     cin >> n;
-        for(int i; i <=n; ++i){
-            if(n==1 || n||2){
-                n=1;
-                cout << n;
-                continue;
-            } 
-            temp = num1 + num2;
-            num1 = num2;
-            num2 = temp;
-        }
-        cout << temp;
+    f[0] = 0;
+    f[1] = 1;
+    for (i=2; i<n; ++i){
+        f[i] = f[i-1] + f[i-2];
+    }
+    for (i=0; i<n; ++i){
+        cout << f[i] << " ";
+    }
     /// END  <STUDENT ANSWER>
 }
