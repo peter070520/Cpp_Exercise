@@ -13,13 +13,15 @@ int cP(int n, int* p, int  s)
 
 int a2B(int n, int st, int a, int b)
 {
-	if (n == 0)		return 0;
+	if (n == 0)
+		return 0;
 
-	if (n < 0)		return 0;
+	if (n < 0)
+		return 0;
 
 	int i = n % b;
 	st++;
-	int result = a2B(n / b, st, a, b) + i * pow(a, (st - 2));
+	int result = a2B(n/b, st, a, b) + i * pow(a, (st-2));
 	return result;
 
 }

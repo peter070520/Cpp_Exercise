@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cstring>
 #include <math.h>
+#include <bits/stdc++.h>
 
 using namespace std;
 
@@ -10,6 +11,11 @@ long long int decimalToBinary(int decimal_number)
 	/*
 	* STUDENT ANSWER
 	*/
-    
+    if (decimal_number == 0){
+		return 0;
+	}
+	else {
+		return (decimal_number % 2 + 10 * decimalToBinary(decimal_number/2));
+	}
 }
 /// END  <STUDENT ANSWER>

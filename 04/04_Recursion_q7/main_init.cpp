@@ -7,7 +7,7 @@ const int NO_IGNORED_LINES = 5;
 int main() {
     codeCheck(CHECKED_FILENAME, NO_IGNORED_LINES);
 
-    cout << decimalToBinary(20);;
+    cout << decimalToBinary(20);
 
     /// END  <TEST CODE>
 
