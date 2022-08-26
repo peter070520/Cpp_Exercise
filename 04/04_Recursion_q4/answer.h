@@ -8,7 +8,7 @@ int recursiveSearch(int& n , int m, int arr[], int index)
 {
    // Implement function content here
    --n;
-   if (n<0){
+   if (n<0 && n<=108){
       return -1;
    }
    if (arr[n] == m){
