@@ -7,13 +7,25 @@ using namespace std;
 int recursiveSearch(int& n , int m, int arr[], int index)
 {
    // Implement function content here
-   --n;
-   if (n<0 && n<=108){
+   if (index == n){
       return -1;
    }
-   if (arr[n] == m){
-      return index=n;
+   else if (arr[index] == m){
+      int i=0, k=0, *ptr=new int[n-1];
+      for (i=0; i<n; ++i){
+         if (arr[i] != m){
+            *(ptr+k) = arr[i];
+            ++k;
+         }
+      }
+      for (i=0; i<n-1; ++i){
+         arr[i] = ptr[i];
+      }
+      delete[] ptr;
+      return index;
    }
-   return recursiveSearch(n, m, arr, index);
+   else {
+      return recursiveSearch(n, m, arr, index+1);
+   }
 }
 /// END  <STUDENT ANSWER>
