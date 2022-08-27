@@ -7,10 +7,10 @@ using namespace std;
 int recursiveSearch(int& n , int m, int arr[], int index)
 {
    // Implement function content here
-   if (index == n){
+   if (index == (n-1)){
       return -1;
    }
-   else if (arr[index] == m){
+   if (arr[index] == m){
       int i=0, k=0, *ptr=new int[n-1];
       for (i=0; i<n; ++i){
          if (arr[i] != m){
@@ -21,6 +21,7 @@ int recursiveSearch(int& n , int m, int arr[], int index)
       for (i=0; i<n-1; ++i){
          arr[i] = ptr[i];
       }
+      n--;
       delete[] ptr;
       return index;
    }
