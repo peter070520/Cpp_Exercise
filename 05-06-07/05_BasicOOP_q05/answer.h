@@ -8,12 +8,10 @@ class ClockType
 {
 public:
     ClockType(int, int, int);
-    ClockType();    
+    ClockType();
     void printTime() const;
     void setTime(int, int, int);
-    
-    void getTime(int&, int&, int&) const;
-    
+    void getTime(int &, int &, int &) const;
 
 private:
     int hr;
@@ -31,6 +29,13 @@ ClockType::ClockType()
 ClockType::ClockType(int hours, int minutes, int seconds)
 {
     this->setTime(hours, minutes, seconds);
+}
+
+void ClockType::getTime(int &hours, int &minutes, int &seconds) const
+{
+    hours = this->hr;
+    minutes = this->min;
+    seconds = this->sec;
 }
 
 void ClockType::setTime(int hours, int minutes, int seconds)
@@ -51,18 +56,17 @@ void ClockType::setTime(int hours, int minutes, int seconds)
 
 void ClockType::printTime() const
 {
-   if (hr < 10)
-      cout << "0";
-   cout << hr << ":";
-   if (min < 10)
-      cout << "0";
-   cout << min << ":";
-   if (sec < 10)
-      cout << "0";
-   cout << sec;
+    if (hr < 10)
+        cout << "0";
+    cout << hr << ":";
+    if (min < 10)
+        cout << "0";
+    cout << min << ":";
+    if (sec < 10)
+        cout << "0";
+    cout << sec;
 }
 
 // TODO
-
 
 /// END  <STUDENT ANSWER>
