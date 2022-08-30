@@ -1,24 +1,27 @@
-#include <iostream>
-#include <cstring>
-#include <sstream>
-
-using namespace std;
-
-/// BEGIN  <STUDENT ANSWER>
-class Integer {
+class Integer
+{
 private:
-    int n;
-    int* arr;
+    int val;
 
 public:
-    Integer(){
-
+    void setValue(int val);
+    int getValue(int val);
+    // Integer(int val);
+    Integer(int val)
+    {
+        this->val = val;
     }
-    ~Integer(){
-        delete[] arr;
-    }
-    string str() const{
-
-    }
+    // Integer::~Integer(){
+    //     delete[] arr;
+    // }
 };
+
+void Integer::setValue(int value)
+{
+    value = val;
+}
+int Integer::getValue(int val)
+{
+    return val;
+}
 /// END  <STUDENT ANSWER>
