@@ -7,22 +7,29 @@ using namespace std;
 class ClockType
 {
 public:
-    ClockType();
-      
-    void setTime(int, int, int);
-    void printTime() const;
+   ClockType();
+
+   void setTime(int, int, int);
+   void printTime() const;
 
 private:
-    int hr;
-    int min;
-    int sec;
+   int hr;
+   int min;
+   int sec;
 };
 
 ClockType::ClockType()
 {
-    hr = 0;
-    min = 0;
-    sec = 0;
+   hr = 0;
+   min = 0;
+   sec = 0;
+}
+
+void ClockType::setTime(int hr, int min, int sec)
+{
+   this->hr = hr;
+   this->min = min;
+   this->sec = sec;
 }
 
 void ClockType::printTime() const
@@ -39,6 +46,5 @@ void ClockType::printTime() const
 }
 
 // TODO
-
 
 /// END  <STUDENT ANSWER>
