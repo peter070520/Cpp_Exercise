@@ -188,6 +188,38 @@ T SLinkedList<T>::removeAt(int index)
 {
     /* Remove element at index and return removed value */
     //TODO
+    if ((index<0) || (index>count-1)){
+        throw out_of_range("Index is out of range");
+    }
+    Node *pre=this->head;
+    int cursor=0;
+    if (index==0){
+        Node *temp=this->head;
+        T delData=this->head->data;
+        this->head=this->head->next;
+        delete temp;
+        --this->count;
+        return delData;
+    }
+
+    while (pre!=NULL)
+    {
+        if (cursor==index-1){
+            break;
+        }
+        pre=pre->next;
+        ++cursor;
+    }
+    Node *del=pre->next;
+    T delData=del->data;
+    pre->next=del->next;
+    del->next=NULL;
+    if (pre->next==NULL){
+        this->tail=pre;
+    }
+    delete del;
+    --this->count;
+    return delData;
 }
 
 template <class T>
@@ -195,12 +227,45 @@ bool SLinkedList<T>::removeItem(const T& item)
 {
     /* Remove the first apperance of item in list and return true, otherwise return false */
     //TODO
-    
+    if (this->count==0){
+        return false;
+    }
+    if (this->head->data==item){
+        this->removeAt(0);
+        return true;
+    }
+    bool found=false;
+    Node *pre=this->head;
+    while (pre!=this->tail)
+    {
+        if (pre->next->data==item){
+            found=true;
+            break;
+        }
+        pre=pre->next;
+    }
+    if (!found){
+        return false;
+    }
+    Node *del=pre->next;
+    pre->next=del->next;
+    del->next=NULL;
+    if (del==this->tail){
+        tail=pre;
+    }
+    delete del;
+    --this->count;
+    return true;
 }
 
 template<class T>
 void SLinkedList<T>::clear(){
     /* Remove all elements in list */
     //TODO
+    while (this->count>0)
+    {
+        this->removeAt(0);
+    }
+    
 }
 

@@ -115,34 +115,71 @@ template<class T>
 T SLinkedList<T>::get(int index) {
     /* Give the data of the element at given index in the list. */
     //TODO
+    if ((index<0) || (index>count-1)){
+        throw out_of_range("The index is out of range!");
+    }
+    Node *temp=this->head;
+    int cursor=0;
+    while (temp!=NULL)
+    {
+        if (cursor==index){
+            break;
+        }
+        temp=temp->next;
+        ++cursor;
+    }
+    return temp->data;
 }
 
 template <class T>
 void SLinkedList<T>::set(int index, const T& e) {
     /* Assign new value for element at given index in the list */
     //TODO
-
+    if ((index<0) || (index>count-1)){
+        throw out_of_range("The index is out of range!");
+    }
+    Node *temp=this->head;
+    int cursor=0;
+    while (temp!=NULL)
+    {
+        if (cursor==index){
+            temp->data=e;
+            return;
+        }
+        temp=temp->next;
+        ++cursor;
+    }
+    
 }
 
 template<class T>
 bool SLinkedList<T>::empty() {
     /* Check if the list is empty or not. */
     //TODO
-    
+    return count==0;
 }
 
 template<class T>
 int SLinkedList<T>::indexOf(const T& item) {
     /* Return the first index wheter item appears in list, otherwise return -1 */
     //TODO
-
+    Node *temp=this->head;
+    int cursor=0;
+    while (temp!=NULL){
+        if (temp->data==item){
+            return cursor;
+        }
+        temp=temp->next;
+        ++cursor;
+    }
+    return -1;
 }
 
 template<class T>
 bool SLinkedList<T>::contains(const T& item) {
     /* Check if item appears in the list */
     //TODO
-    
+    return indexOf(item)!=-1;
 }
 
 

@@ -56,16 +56,51 @@ template <class T>
 void SLinkedList<T>::add(const T& e) {
     /* Insert an element into the end of the list. */
     //TODO
+    Node *pNew = new Node(e);
+    if (this->count==0){
+        this->head = this->tail = pNew;
+    }
+    else {
+        this->tail->next = pNew;
+        this->tail = pNew;
+    }
+    this->count++;
 }
 
 template<class T>
 void SLinkedList<T>::add(int index, const T& e) {
     /* Insert an element into the list at given index. */
     //TODO
+    if ((index<0) || (index>count)){
+        throw out_of_range("Index is out of range");
+    }
+    if (index==this->count){
+        return this->add(e);
+    }
+    Node *pNew = new Node(e);
+    if (index==0){
+        pNew->next=this->head;
+        this->head=pNew;
+    }
+    else {
+        Node *pre=head;
+        int cursor=0;
+        while (pre!=NULL){
+            if (cursor==index-1){
+                break;
+            }
+            pre=pre->next;
+            ++cursor;
+        }
+        pNew->next=pre->next;
+        pre->next=pNew;
+    }
+    ++this->cout;
 }
 
 template<class T>
 int SLinkedList<T>::size() {
     /* Return the length (size) of list */ 
     //TODO
+    return count;
 }
