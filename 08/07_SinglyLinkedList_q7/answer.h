@@ -61,6 +61,19 @@ void LLNode::clear() {
 /// BEGIN  <STUDENT ANSWER>
 LLNode* rotateLinkedList(LLNode* head, int k) {
     // STUDENT ANSWER
-    
+    if (head==NULL || head->next==NULL){
+        return head;
+    }
+    for (int i=0; i<k; ++i){
+        LLNode* current = head;
+        while (current->next->next!=NULL){
+            current=current->next;
+        }
+        LLNode* end=current->next;
+        current->next=NULL;
+        end->next=head;
+        head=end;
+    }
+    return head;
 }
 /// END  <STUDENT ANSWER>

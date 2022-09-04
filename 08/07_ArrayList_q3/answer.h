@@ -6,18 +6,18 @@ using namespace std;
 	/// BEGIN  <STUDENT ANSWER>
 int equalSumIndex(vector<int>& nums) {
     //TODO
-    int i=0, j=0, k=0, n=sizeof(nums)/sizeof(nums[0]);
-    for (i=1; i<n; ++i){
-        int leftSum=0, rightSum=0;
-        for (j=i-1; j>=0; --j){
-            leftSum += nums[j];
+    int i=0, size=nums.size();
+    int totalSum=0, leftSum=0, rightSum=0;
+
+    for (i=0; i<size; ++i){
+        totalSum+=nums[i];
+    }
+    for (i=0; i<size; ++i){
+        rightSum=totalSum-leftSum-nums[i];
+        if (leftSum==rightSum){
+            return i;
         }
-        for (k=i+1; k<n; ++k){
-            rightSum += nums[k];
-        }
-        if (leftSum == rightSum){
-            return nums[i];   
-        }
+        leftSum=leftSum+nums[i];
     }
 	return -1;
 }

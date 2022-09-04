@@ -62,6 +62,12 @@ void LLNode::clear() {
 LLNode* reverseLinkedList(LLNode* head)
 {
     // STUDENT ANSWER
-    
+    if (head==NULL || head->next==NULL){
+        return head;
+    }
+    LLNode* rest=reverseLinkedList(head->next);
+    head->next->next=head;
+    head->next=NULL;
+    return rest;
 }
 /// END  <STUDENT ANSWER>
