@@ -1,24 +1,42 @@
-#include "main.h"
-#include "Cache.h"
+#include <iostream>
+#include <string>
+#include <sstream>
+#include <vector>
 #include <stack>
 #include <queue>
+#include <list>
+#include <assert.h>
+#include <string>
+#include <climits>
+#include <map>
+#include <unordered_map>
+#include <set>
+#include <unordered_set>
+#include <functional>
+#include <algorithm>
+#include <utility>
+#include <fstream>
+#include <cstdlib>
+#include <stdio.h>
+#include "main.h"
+#include "Cache.h"
+
+using namespace std;
+
 stack<Elem> st;
 queue<Elem> qu;
-
 int i = 0, k = 0, j = 0;
 
 class BinarySearchTree
 {
-    struct node
+    struct Node
     {
         Elem *p;
-        node *left;
-        node *right;
+        Node *left;
+        Node *right;
     };
-
-    node *root;
-
-    node *makeEmpty(node *root)
+    Node *root;
+    Node *makeEmpty(Node *root)
     {
         if (root == NULL)
             return NULL;
@@ -29,75 +47,118 @@ class BinarySearchTree
         }
         return NULL;
     }
-
-    node *insert(int x, Data *y, node *root)
+    Node *insert(int x, Data *y, Node *root)
     {
         if (root == NULL)
         {
-            root = new node;
+            root = new Node;
             root->p->addr = x;
             root->p->data = y;
             root->left = root->right = NULL;
         }
         else if (x < root->p->addr)
+        {
             root->left = insert(x, y, root->left);
+        }
         else if (x > root->p->addr)
+        {
             root->right = insert(x, y, root->right);
+        }
         return root;
     }
-
-    void inorder(node *root)
-    {
-        Elem X(root->p->addr, root->p->data, root->p->sync);
-        if (root == NULL)
-            return;
-
-        inorder(root->left);
-        X.print();
-        inorder(root->right);
-    }
-
-    void preorder(node *root)
-    {
-        Elem X(root->p->addr, root->p->data, root->p->sync);
-        if (root == NULL)
-            return;
-        X.print();
-        preorder(root->left);
-        preorder(root->right);
-    }
-
-    node *find(node *root, int x)
+    Node *find(Node *root, int x)
     {
         if (root == NULL)
+        {
             return NULL;
+        }
         else if (x < root->p->addr)
+        {
             return find(root->left, x);
+        }
         else if (x > root->p->addr)
+        {
             return find(root->right, x);
+        }
         else
+        {
             return root;
+        }
     }
-
-    node *findMin(node *root)
+    Node *findMin(Node *root)
     {
         if (root == NULL)
+        {
             return NULL;
+        }
         else if (root->left == NULL)
+        {
             return root;
+        }
         else
+        {
             return findMin(root->left);
+        }
     }
-
-    node *remove(int x, node *root)
+    Node *findMax(Node *root)
     {
-        node *temp;
+        if (root != NULL)
+        {
+            while (root->right != NULL)
+            {
+                root = root->right;
+            }
+        }
+        return root;
+    }
+    Node *findParent(Node *root, int x)
+    {
         if (root == NULL)
+        {
             return NULL;
+        }
         else if (x < root->p->addr)
-            root->left = remove(x, root->left);
+        {
+            if (root->left->p->addr == x)
+            {
+                return root;
+            }
+            else
+            {
+                return findParent(root->left, x);
+            }
+        }
         else if (x > root->p->addr)
+        {
+            if (root->right->p->addr == x)
+            {
+                return root;
+            }
+            else
+            {
+                return findParent(root->right, x);
+            }
+        }
+        else
+        {
+            return NULL;
+        }
+    }
+    Node *remove(int x, Node *root)
+    {
+        Node *temp;
+        if (root == NULL)
+        {
+            return NULL;
+        }
+        else if (x < root->p->addr)
+        {
+            root->left = remove(x, root->left);
+        }
+        else if (x > root->p->addr)
+        {
             root->right = remove(x, root->right);
+        }
         else if (root->left && root->right)
         {
             temp = findMin(root->right);
@@ -108,13 +169,39 @@ class BinarySearchTree
         {
             temp = root;
             if (root->left == NULL)
+            {
                 root = root->right;
+            }
             else if (root->right == NULL)
+            {
                 root = root->left;
+            }
             delete temp;
         }
-
         return root;
+    }
+    void inorder(Node *root)
+    {
+        Elem X(root->p->addr, root->p->data, root->p->sync);
+        if (root == NULL)
+        {
+            return;
+        }
+
+        inorder(root->left);
+        X.print();
+        inorder(root->right);
+    }
+    void preorder(Node *root)
+    {
+        Elem X(root->p->addr, root->p->data, root->p->sync);
+        if (root == NULL)
+        {
+            return;
+        }
+        X.print();
+        preorder(root->left);
+        preorder(root->right);
     }
 
 public:
@@ -122,36 +209,34 @@ public:
     {
         root = NULL;
     }
-
     ~BinarySearchTree()
     {
         root = makeEmpty(root);
     }
-
     void insert(int x, Data *y)
     {
         root = insert(x, y, root);
     }
-
     void display()
     {
         inorder(root);
     }
-
     void displaypreOrder()
     {
         preorder(root);
     }
-
     Elem *search(int x)
     {
         root = find(root, x);
         if (root == NULL)
+        {
             return NULL;
+        }
         else
+        {
             return root->p;
+        }
     }
-
     void remove(int x)
     {
         root = remove(x, root);
@@ -173,7 +258,7 @@ Elem *Cache::put(int addr, Data *cont)
         arr[i]->data = cont;
         st.push(A);
         qu.push(A);
-        i++;
+        ++i;
         return NULL;
     }
     else
@@ -190,9 +275,11 @@ Elem *Cache::put(int addr, Data *cont)
             arr[k]->addr = addr;
             arr[k]->data = cont;
             arr[k]->sync = false;
-            k++;
+            ++k;
             if (k == MAXSIZE)
+            {
                 k = 0;
+            }
             st.push(A);
             return b;
         }
@@ -208,9 +295,11 @@ Elem *Cache::put(int addr, Data *cont)
             arr[MAXSIZE - j]->addr = addr;
             arr[MAXSIZE - j]->data = cont;
             arr[MAXSIZE - j]->sync = false;
-            j++;
+            ++j;
             if (j > MAXSIZE)
+            {
                 j = 0;
+            }
             return b;
         }
     }
@@ -226,7 +315,7 @@ Elem *Cache::write(int addr, Data *cont)
     else
     {
         ptr->data = cont;
-        for (int m = 0; m < p; m++)
+        for (int m = 0; m < p; ++m)
         {
             if (m == addr)
             {
@@ -244,7 +333,6 @@ void Cache::print()
         st.top().print();
         st.pop();
     }
-
 }
 void Cache::preOrder()
 {
