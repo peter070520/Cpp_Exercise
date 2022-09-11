@@ -1,0 +1,138 @@
+#ifndef CACHE_H
+#define CACHE_H
+
+#include <iostream>
+#include <string>
+#include <sstream>
+#include <vector>
+#include <stack>
+#include <queue>
+#include <list>
+#include <assert.h>
+#include <string>
+#include <climits>
+#include <map>
+#include <unordered_map>
+#include <set>
+#include <unordered_set>
+#include <functional>
+#include <algorithm>
+#include <utility>
+#include <fstream>
+#include <cstdlib>
+#include <stdio.h>
+// #include "main.h"
+
+using namespace std;
+#define MAXSIZE 15
+class Data
+{
+public:
+    virtual string getValue() = 0;
+    virtual ~Data(){};
+};
+
+class Int : public Data
+{
+    int value;
+
+public:
+    Int(int v) : value(v) {}
+    ~Int() {}
+    string getValue()
+    {
+        return to_string(value);
+    }
+};
+class Float : public Data
+{
+    float value;
+
+public:
+    Float(float v) : value(v) {}
+    ~Float() {}
+    string getValue()
+    {
+        return to_string(value);
+    }
+};
+class Bool : public Data
+{
+    bool value;
+
+public:
+    Bool(bool v) : value(v) {}
+    ~Bool() {}
+    string getValue()
+    {
+        return value ? "true" : "false";
+    }
+};
+class Address : public Data
+{
+    int value;
+
+public:
+    Address(int v) : value(v) {}
+    ~Address() {}
+    string getValue()
+    {
+        return to_string(value) + "A";
+    }
+};
+
+class Elem
+{
+public:
+    int addr;
+    Data *data;
+    bool sync;
+    Elem(int a, Data *d, bool s) : addr(a), data(d), sync(s){};
+    ~Elem() { delete data; }
+    void print()
+    {
+        cout << addr << " " << data->getValue() << " " << (sync ? "true" : "false") << endl;
+    }
+};
+
+class Cache
+{
+    Elem **arr;
+    int p;
+
+public:
+    Cache(int s)
+    {
+        arr = new Elem *[s];
+        p = 0;
+    }
+    ~Cache()
+    {
+        delete[] arr;
+    }
+    Data *read(int addr);
+    Elem *put(int addr, Data *cont);
+    Elem *write(int addr, Data *cont);
+    void print();
+    void preOrder();
+    void inOrder();
+};
+class BinarySearchTree
+{
+    Elem *root;
+    int size;
+    void preOrder(Elem *root);
+    void inOrder(Elem *root);
+
+public:
+    BinarySearchTree();
+    ~BinarySearchTree();
+    Elem *put(int addr, Data *cont);
+    Elem *write(int addr, Data *cont);
+    Data *read(int addr);
+    void print();
+    void preOrder();
+    void inOrder();
+};
+
+#endif

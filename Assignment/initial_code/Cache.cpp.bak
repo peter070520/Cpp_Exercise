@@ -1,0 +1,262 @@
+#include <iostream>
+#include <string>
+#include <sstream>
+#include <vector>
+#include <stack>
+#include <queue>
+#include <list>
+#include <assert.h>
+#include <string>
+#include <climits>
+#include <map>
+#include <unordered_map>
+#include <set>
+#include <unordered_set>
+#include <functional>
+#include <algorithm>
+#include <utility>
+#include <fstream>
+#include <cstdlib>
+#include <stdio.h>
+// #include "main.h"
+// #include "Cache.h"
+
+using namespace std;
+#define MAXSIZE 15
+class Data
+{
+public:
+    virtual string getValue() = 0;
+    virtual ~Data(){};
+};
+
+class Int : public Data
+{
+    int value;
+
+public:
+    Int(int v) : value(v) {}
+    ~Int() {}
+    string getValue()
+    {
+        return to_string(value);
+    }
+};
+class Float : public Data
+{
+    float value;
+
+public:
+    Float(float v) : value(v) {}
+    ~Float() {}
+    string getValue()
+    {
+        return to_string(value);
+    }
+};
+class Bool : public Data
+{
+    bool value;
+
+public:
+    Bool(bool v) : value(v) {}
+    ~Bool() {}
+    string getValue()
+    {
+        return value ? "true" : "false";
+    }
+};
+class Address : public Data
+{
+    int value;
+
+public:
+    Address(int v) : value(v) {}
+    ~Address() {}
+    string getValue()
+    {
+        return to_string(value) + "A";
+    }
+};
+
+class Cache
+{
+    Elem **arr;
+    int p;
+
+public:
+    Cache(int s)
+    {
+        arr = new Elem *[s];
+        p = 0;
+    }
+    ~Cache()
+    {
+        delete[] arr;
+    }
+    Data *read(int addr);
+    Elem *put(int addr, Data *cont);
+    Elem *write(int addr, Data *cont);
+    void print();
+    void preOrder();
+    void inOrder();
+};
+
+class Elem
+{
+public:
+    int addr;
+    Data *data;
+    bool sync;
+    Elem(int a, Data *d, bool s) : addr(a), data(d), sync(s){};
+    ~Elem() { delete data; }
+    void print()
+    {
+        cout << addr << " " << data->getValue() << " " << (sync ? "true" : "false") << endl;
+    }
+};
+class BinarySearchTree{
+    private:
+        Elem *root;
+        int size;
+    public:
+        BinarySearchTree(){
+            root = NULL;
+            size = 0;
+        }
+        ~BinarySearchTree(){
+            delete root;
+        }
+};
+
+BinarySearchTree *bst = new BinarySearchTree();
+BinarySearchTree::BinarySearchTree(){
+    root = NULL;
+    size = 0;
+}
+BinarySearchTree::~BinarySearchTree(){
+    delete root;
+}
+BinarySearchTree
+
+Data *Cache::read(int addr)
+{
+
+}
+Elem *Cache::put(int addr, Data *cont)
+{
+
+}
+Elem *Cache::write(int addr, Data *cont)
+{
+
+}
+void Cache::print()
+{
+    bst->print();
+}
+void Cache::preOrder()
+{
+    bst->preOrder(bst->root);
+}
+void Cache::inOrder()
+{
+    bst->inOrder(bst->root);
+}
+
+// #endif
+
+Data *getData(string s)
+{
+    stringstream ss(s);
+    int idata;
+    float fdata;
+    if (ss >> idata)
+        return new Int(idata);
+    else if (ss >> fdata)
+        return new Float(fdata);
+    else if (s.compare("true") || s.compare("false"))
+        return new Bool(s.compare("true"));
+    else
+    {
+        s.resize(s.size() - 1);
+        return new Address(stoi(s));
+    }
+}
+
+void Cache::print()
+{
+
+}
+
+void Cache::preOrder()
+{
+
+}
+
+void Cache::inOrder()
+{
+
+}
+
+void simulate(string filename, Cache *c)
+{
+    ifstream ifs;
+    ifs.open(filename, std::ifstream::in);
+    string s;
+    while (getline(ifs, s))
+    {
+        stringstream ss(s);
+        string code, tmp;
+        ss >> code;
+        int addr;
+        switch (code[0])
+        {
+        case 'R': // read
+            ss >> addr;
+            Data *res;
+            res = c->read(addr);
+            if (res == NULL)
+            {
+                ss >> tmp;
+                c->put(addr, getData(tmp));
+            }
+            else
+            {
+                cout << res->getValue() << endl;
+            }
+            break;
+        case 'U': // put
+            ss >> addr;
+            ss >> tmp;
+            c->put(addr, getData(tmp));
+            break;
+        case 'W': // write
+            ss >> addr;
+            ss >> tmp;
+            c->write(addr, getData(tmp));
+            break;
+        case 'P': // print
+            cout << "Print stack\n";
+            c->print();
+            break;
+        case 'E': // preorder
+            cout << "Print BST in preorder\n";
+            c->preOrder();
+            break;
+        case 'I': // inorder
+            cout << "Print BST in inorder\n";
+            c->inOrder();
+            break;
+        }
+    }
+}
+
+int main(int argc, char *argv[])
+{
+    Cache *c = new Cache(MAXSIZE);
+    string fileName = "test1.txt";
+    simulate(fileName, c);
+    delete c;
+    return 0;
+}

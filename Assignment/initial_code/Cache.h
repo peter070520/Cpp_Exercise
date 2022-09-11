@@ -2,7 +2,7 @@
 #define CACHE_H
 
 #include "main.h"
-
+#include <iostream>
 class Cache {
         Elem** arr;
         int p;
@@ -10,6 +10,7 @@ class Cache {
     Cache(int s) {
         arr = new Elem*[s];
         p = 0;
+
     }
     ~Cache() {
         delete[] arr;
@@ -22,3 +23,4 @@ class Cache {
 		void inOrder();
 };
 #endif
+
