@@ -4,20 +4,20 @@
 #include "Cache.cpp"
 
 Data* getData(string s) {
-	stringstream ss(s);
-	int idata;
+    stringstream ss(s);
+    int idata;
     float fdata;
     if (ss >> idata) 
-		return new Int(idata);
+        return new Int(idata);
     else if (ss >> fdata)
-    	return new Float(fdata);
+        return new Float(fdata);
     else if (s.compare("true") || s.compare("false"))
-    	return new Bool(s.compare("true"));
+        return new Bool(s.compare("true"));
     else {
-		s.resize(s.size()-1);
-		return new Address(stoi(s));
-	}
-    	
+        s.resize(s.size()-1);
+        return new Address(stoi(s));
+    }
+        
 }
 void simulate(string filename,Cache* c)
 {
@@ -31,47 +31,47 @@ void simulate(string filename,Cache* c)
     ss >> code;
     int addr;
     switch (code[0]) {
-    	case 'R': //read
-			    ss >> addr; 
-    			Data* res;
-				res = c->read(addr);
-    			if (res == NULL) {
-    				ss >> tmp;
-    				c->put(addr,getData(tmp));
-    			} else {
-					cout << res->getValue() << endl;
-				}
-    			break;
+        case 'R': //read
+                ss >> addr; 
+                Data* res;
+                res = c->read(addr);
+                if (res == NULL) {
+                    ss >> tmp;
+                    c->put(addr,getData(tmp));
+                } else {
+                    cout << res->getValue() << endl;
+                }
+                break;
         case 'U': //put
                 ss >> addr;
                 ss >> tmp;
                 c->put(addr,getData(tmp));
                 break;
-    	case 'W': //write
+        case 'W': //write
                 ss >> addr;
-    			ss >> tmp;
-    			c->write(addr,getData(tmp));
-    			break;
-    	case 'P': // print
-    			cout << "Print stack\n";
-    			c->print();
-    			break;
-    	case 'E': // preorder
-    			cout << "Print BST in preorder\n";
-    			c->preOrder();
-    			break;
-    	case 'I': // inorder
-    			cout << "Print BST in inorder\n";
-    			c->inOrder();
-    			break;
+                ss >> tmp;
+                c->write(addr,getData(tmp));
+                break;
+        case 'P': // print
+                cout << "Print stack\n";
+                c->print();
+                break;
+        case 'E': // preorder
+                cout << "Print BST in preorder\n";
+                c->preOrder();
+                break;
+        case 'I': // inorder
+                cout << "Print BST in inorder\n";
+                c->inOrder();
+                break;
     }
   }
 }
 int main(int argc, char* argv[]) {
 
-	Cache* c = new Cache(MAXSIZE);
-  	string fileName = "test1.txt";
+    Cache* c = new Cache(MAXSIZE);
+      string fileName = "test1.txt";
     simulate(fileName,c);
-  	delete c;
-	return 0;
+      delete c;
+    return 0;
 }

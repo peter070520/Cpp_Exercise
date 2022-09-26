@@ -6,46 +6,46 @@
 using namespace std; 
 #define MAXSIZE 15
 class Data {
-	public:
-	virtual string getValue() = 0;
-	virtual ~Data() {};
+    public:
+    virtual string getValue() = 0;
+    virtual ~Data() {};
 };
 
 class Int: public Data {
-	int value;
-	public:
-	Int(int v):value(v){}
-	~Int(){}
-	string getValue() {
-		return to_string(value);
-	}
+    int value;
+    public:
+    Int(int v):value(v){}
+    ~Int(){}
+    string getValue() {
+        return to_string(value);
+    }
 };
 class Float: public Data {
-	float value;
-	public:
-	Float(float v):value(v){}
-	~Float() {}
-	string getValue() {
-		return to_string(value);
-	}
+    float value;
+    public:
+    Float(float v):value(v){}
+    ~Float() {}
+    string getValue() {
+        return to_string(value);
+    }
 };
 class Bool:public Data {
-	bool value;
-	public:
-	Bool(bool v):value(v){}
-	~Bool() {}
-	string getValue() {
-		return value?"true":"false";
-	}
+    bool value;
+    public:
+    Bool(bool v):value(v){}
+    ~Bool() {}
+    string getValue() {
+        return value?"true":"false";
+    }
 };
 class Address:public Data {
-	int value;
-	public:
-	Address(int v):value(v){}
-	~Address() {}
-	string getValue() {
-		return to_string(value)+"A";
-	}
+    int value;
+    public:
+    Address(int v):value(v){}
+    ~Address() {}
+    string getValue() {
+        return to_string(value)+"A";
+    }
 };
 
 class Elem{
